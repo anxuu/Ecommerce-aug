@@ -1,0 +1,91 @@
+.flex {
+    display: flex;
+}
+
+.flex.navbar {
+    padding: 0.8rem 2rem;
+    justify-content: space-between;
+
+    align-items: center;
+    position: sticky;
+
+    background-color: #212529;
+    color: white;
+
+}
+
+.flex.navleft {
+    gap: 15px;
+    align-items: center;
+
+}
+
+.navleft img {
+    max-width: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.flex.navleft a {
+    text-decoration: none;
+    color: white;
+}
+
+.flex.cart {
+    gap: 2px;
+    cursor: pointer;
+}
+
+.flex.Searchbar {
+    gap: 10px;
+
+}
+
+.flex.Searchbar input {
+
+    border: none;
+    outline: none;
+    padding: 5px;
+}
+
+.select {
+    padding: 5px;
+    border-radius: 5px;
+    background-color: #212529;
+    color: white;
+    border: none;
+    outline: none;
+
+
+}
+
+
+.justify {
+    display: none;
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    .flex.navbar {
+        font-size: 1.2rem;
+    }
+
+    .flex.Searchbar {
+        display: none;
+    }
+
+    .justify {
+        display: inline-block;
+
+        font-size: 1.2rem;
+
+        color: white;
+        cursor: pointer;
+    }
+
+    .flex.cart {
+        display: none;
+    }
+}
