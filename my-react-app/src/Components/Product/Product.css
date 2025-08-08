@@ -125,3 +125,44 @@ img:hover {
     padding-right: 10px;
 
 }
+
+.Sortby {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+
+}
+
+.Sortby button {
+    border: none;
+    outline: none;
+}
+
+
+.Categories {
+    display: flex;
+    justify-content: end;
+    gap: 4px;
+
+}
+
+.Categoriesselect {
+    outline: none;
+    background-color: #212529;
+    color: white;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.Categoriesselect option {
+    background-color: rgb(219, 213, 205);
+    color: rgb(27, 15, 15);
+    outline: none;
+}
+
+.Clear {
+    background-color: #FFFFFF;
+    color: #cd1111;
+    border: none;
+    outline: none;
+}
