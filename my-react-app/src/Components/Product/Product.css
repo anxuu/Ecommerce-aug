@@ -128,14 +128,30 @@ img:hover {
 
 .Sortby {
     display: flex;
+    align-items: center;
     gap: 20px;
     justify-content: space-between;
+    background-color: #b49897;
+    padding: 2px;
+
+}
+
+.btns {
+    display: flex;
+    gap: 20px;
+    margin-top: 2px;
 
 }
 
 .Sortby button {
     border: none;
     outline: none;
+    border-radius: 10px;
+    padding: 5px;
+    background-color: #212529;
+    color: #FFFFFF;
+    cursor: pointer;
+
 }
 
 
@@ -152,6 +168,7 @@ img:hover {
     color: white;
     border-radius: 5px;
     padding: 10px;
+    cursor: pointer;
 }
 
 .Categoriesselect option {
@@ -166,3 +183,5 @@ img:hover {
     border: none;
     outline: none;
 }
+
+@media screen and (max-width: 768px) {}

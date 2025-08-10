@@ -3,44 +3,50 @@ import './Product.css';
 import axios from "axios";
 
 function Products() {
+    const [displaydata, setdisplaydata] = useState([]);
 
-    const [fetcheddata, setfetcheddata] = useState([]);
-    const [filtereddata, setfiltereddata] = useState([]);
-    const [isfiltered, setisfiltered] = useState(false);
     const [selectedopt, setselectedopt] = useState('Categories');
+    const [alldata, setalldata] = useState([]);
+
 
     useEffect(() => {
         axios.get('https://fakestoreapi.com/products')
-            .then(response => setfetcheddata(response.data))
+            .then(response => {
+                setalldata(response.data);
+                setdisplaydata(response.data);
+            })
             .catch(error => console.error('Error fetching data:', error))
-            .finally(() => console.log('Data fetched'));
+            .finally();
     }, []);
 
 
 
     function Filteredarray(name) {
 
-        let category_data = fetcheddata.filter(item => {
+        let category_data = alldata.filter(item => {
             return (item.category === name);
         });
 
-        setfiltereddata(category_data);
-        setisfiltered(true);
-
+        setdisplaydata(category_data);
     }
 
     function ClearFilter() {
-        setisfiltered(false);
-        setselectedopt('Categories')
+        setselectedopt('Categories');
+        setdisplaydata(alldata);
 
     }
 
     function Htl() {
-        console.log('htl');
+        setdisplaydata(prevData =>
+            [...prevData].sort((a, b) => b.price - a.price)
+        );
 
     }
+
     function Lth() {
-        console.log('htl2');
+        setdisplaydata(prevData =>
+            [...prevData].sort((a, b) => a.price - b.price)
+        );
 
 
     }
@@ -49,9 +55,16 @@ function Products() {
     return (
         <>
 
+            <h4>Sort by :-</h4>
 
             <div className='Sortby'>
+                <div>
+                    <div className='btns'>
+                        <button onClick={Lth}>Price -- Low to High</button>
+                        <button onClick={Htl}>Price -- High to Low</button>
+                    </div>
 
+                </div>
 
 
                 <div className='Categories'>
@@ -75,77 +88,34 @@ function Products() {
             </div>
 
 
-
-
-
-
             <div className="product-grid">
-
                 {
-                    isfiltered ? (
-
-                        filtereddata.length > 0 ? (
-
-                            filtereddata.map((item, index) => (
-                                <div className="cart" key={index}>
-                                    <div className="imgdiv">
-                                        <img src={item.image} alt={item.title} />
+                    displaydata.length > 0 ? (
+                        displaydata.map((item, index) => (
+                            <div className="cart" key={index}>
+                                <div className="imgdiv">
+                                    <img src={item.image} alt={item.title} />
+                                </div>
+                                <div className="product-details">
+                                    <p className="category">{item.category}</p>
+                                    <h3 className="product-name" title={item.title}>
+                                        {item.title.slice(0, 26)}{item.title.length > 24 ? '...' : ''}
+                                    </h3>
+                                    <div className="price-rating">
+                                        <p className="price">₹{item.price}</p>
+                                        <p className="rating">⭐ {item.rating.rate}</p>
                                     </div>
-                                    <div className="product-details">
-                                        <p className="category">{item.category}</p>
-                                        <h3 className="product-name" title={item.title}>
-                                            {item.title.slice(0, 26)}{item.title.length > 24 ? '...' : ''}
-                                        </h3>
-                                        <div className="price-rating">
-                                            <p className="price">₹{item.price}</p>
-                                            <p className="rating">⭐ {item.rating.rate}</p>
-                                        </div>
-                                        <div className="btn-parent">
-                                            <button className="add-to-cart">Add To Cart</button>
-                                        </div>
+                                    <div className="btn-parent">
+                                        <button className="add-to-cart">Add To Cart</button>
                                     </div>
                                 </div>
-                            ))
-
-                        ) : (
-                            <p>Items not Found</p>
-                        )
-
+                            </div>
+                        ))
                     ) : (
-
-                        (
-                            fetcheddata.map((item, index) => (
-                                <div className="cart" key={index}>
-                                    <div className="imgdiv">
-                                        <img src={item.image} alt={item.title} />
-                                    </div>
-                                    <div className="product-details">
-                                        <p className="category">{item.category}</p>
-                                        <h3 className="product-name" title={item.title}>
-                                            {item.title.slice(0, 26)}{item.title.length > 24 ? '...' : ''}
-                                        </h3>
-                                        <div className="price-rating">
-                                            <p className="price">₹{item.price}</p>
-                                            <p className="rating">⭐ {item.rating.rate}</p>
-                                        </div>
-                                        <div className="btn-parent">
-                                            <button className="add-to-cart">Add To Cart</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))
-                        )
-
+                        <p>Items not Found</p>
                     )
-
-
                 }
-
-
             </div>
-
-
-
         </>
 
     );
