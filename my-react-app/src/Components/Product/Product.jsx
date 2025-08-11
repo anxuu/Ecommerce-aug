@@ -48,9 +48,11 @@ function Products() {
             [...prevData].sort((a, b) => a.price - b.price)
         );
 
+    }
+    function Atc() {
+        alert('added to cart Sucessfully')
 
     }
-
 
     return (
         <>
@@ -106,7 +108,7 @@ function Products() {
                                         <p className="rating">⭐ {item.rating.rate}</p>
                                     </div>
                                     <div className="btn-parent">
-                                        <button className="add-to-cart">Add To Cart</button>
+                                        <button onClick={Atc} className="add-to-cart">Add To Cart</button>
                                     </div>
                                 </div>
                             </div>

@@ -179,9 +179,7 @@ img:hover {
 
 .Clear {
     background-color: #FFFFFF;
-    color: #cd1111;
+    color: #cc0a0a !important;
     border: none;
     outline: none;
 }
-
-@media screen and (max-width: 768px) {}
