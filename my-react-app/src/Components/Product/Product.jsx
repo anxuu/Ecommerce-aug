@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import './Product.css';
 import axios from "axios";
 
-function Products() {
+function Products({ AddtoCart, inCart, Additem, Substractitem, itemquantity }) {
     const [displaydata, setdisplaydata] = useState([]);
 
     const [selectedopt, setselectedopt] = useState('Categories');
     const [alldata, setalldata] = useState([]);
+
 
 
     useEffect(() => {
@@ -18,8 +19,6 @@ function Products() {
             .catch(error => console.error('Error fetching data:', error))
             .finally();
     }, []);
-
-
 
     function Filteredarray(name) {
 
@@ -47,10 +46,6 @@ function Products() {
         setdisplaydata(prevData =>
             [...prevData].sort((a, b) => a.price - b.price)
         );
-
-    }
-    function Atc() {
-        alert('added to cart Sucessfully')
 
     }
 
@@ -107,9 +102,20 @@ function Products() {
                                         <p className="price">₹{item.price}</p>
                                         <p className="rating">⭐ {item.rating.rate}</p>
                                     </div>
-                                    <div className="btn-parent">
-                                        <button onClick={Atc} className="add-to-cart">Add To Cart</button>
-                                    </div>
+                                    {
+                                        inCart[index] ? (
+
+                                            <div className="btn-parent">
+                                                <button value={index} onClick={Additem}>+</button>
+                                                <span>{itemquantity[index]}</span>
+                                                <button value={index} onClick={Substractitem}>-</button>
+                                            </div>
+                                        ) : (
+                                            <div className="btn-parent">
+                                                <button onClick={AddtoCart} value={index} className="add-to-cart">Add To Cart</button>
+                                            </div>
+                                        )
+                                    }
                                 </div>
                             </div>
                         ))

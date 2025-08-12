@@ -2,9 +2,8 @@ import { useState } from 'react';
 import './Navbar.css';
 
 
-function Navbar() {
+function Navbar(props) {
 
-    const [cartquantity, setcartquantity] = useState(5);
     return (
 
         <>
@@ -23,7 +22,7 @@ function Navbar() {
                         <a style={{ textDecoration: 'none', color: 'white' }} href="">Cart</a>
 
                         <span className="cart-icon bi bi-cart4">
-                            <span className="cart-count">{cartquantity}</span>
+                            <span className="cart-count">{props.quantity}</span>
                         </span>
                     </div>
 
