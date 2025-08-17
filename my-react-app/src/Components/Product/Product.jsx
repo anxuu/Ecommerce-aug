@@ -8,13 +8,12 @@ function Products({ AddtoCart, inCart, Additem, Substractitem, itemquantity }) {
     const [selectedopt, setselectedopt] = useState('Categories');
     const [alldata, setalldata] = useState([]);
 
-
-
     useEffect(() => {
         axios.get('https://fakestoreapi.com/products')
             .then(response => {
                 setalldata(response.data);
                 setdisplaydata(response.data);
+
             })
             .catch(error => console.error('Error fetching data:', error))
             .finally();
@@ -88,8 +87,8 @@ function Products({ AddtoCart, inCart, Additem, Substractitem, itemquantity }) {
             <div className="product-grid">
                 {
                     displaydata.length > 0 ? (
-                        displaydata.map((item, index) => (
-                            <div className="cart" key={index}>
+                        displaydata.map((item) => (
+                            <div className="cart" key={item.id}>
                                 <div className="imgdiv">
                                     <img src={item.image} alt={item.title} />
                                 </div>
@@ -103,19 +102,21 @@ function Products({ AddtoCart, inCart, Additem, Substractitem, itemquantity }) {
                                         <p className="rating">⭐ {item.rating.rate}</p>
                                     </div>
                                     {
-                                        inCart[index] ? (
-
+                                        itemquantity[item.id] > 0 ? (
                                             <div className="btn-parent">
-                                                <button value={index} onClick={Additem}>+</button>
-                                                <span>{itemquantity[index]}</span>
-                                                <button value={index} onClick={Substractitem}>-</button>
+                                                <button value={item.id} onClick={Substractitem}>-</button>
+                                                <span>{itemquantity[item.id]}</span>
+                                                <button value={item.id} onClick={Additem}>+</button>
+
                                             </div>
                                         ) : (
                                             <div className="btn-parent">
-                                                <button onClick={AddtoCart} value={index} className="add-to-cart">Add To Cart</button>
+                                                <button onClick={AddtoCart} value={item.id} className="add-to-cart">Add To Cart</button>
                                             </div>
                                         )
                                     }
+
+
                                 </div>
                             </div>
                         ))

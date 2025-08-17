@@ -9,48 +9,46 @@ function Homepage() {
 
     const [cartquantity, setcartquantity] = useState(0);
     const [itemquantity, setitemquantity] = useState({});
-    const [inCart, setinCart] = useState({});
 
 
-    function Additem(e) {
-        let index = e.target.value;
+    function AddtoCart(e) {
+
+        const itemid = e.target.value;
+
+        setcartquantity(prev => prev + 1);
+
+
         setitemquantity(prev => ({
             ...prev,
-            [index]: (prev[index] || 0) + 1
+            [itemid]: (prev[itemid] || 0) + 1
+        }));
+    }
+
+    function Additem(e) {
+        let itemid = e.target.value;
+        setitemquantity(prev => ({
+            ...prev,
+            [itemid]: (prev[itemid] || 0) + 1
         }));
     }
 
     function Substractitem(e) {
-        let index = e.target.value;
+        let itemid = e.target.value;
 
         setitemquantity(prev => ({
             ...prev,
-            [index]: (prev[index] || 0) - 1
+            [itemid]: prev[itemid] > 1 ? (prev[itemid] - 1) : 0
         }));
     }
 
-    function AddtoCart(e) {
-        const index = e.target.value;
-        setcartquantity(prev => prev + 1);
 
-
-        setinCart(prev => ({
-            ...prev,
-            [index]: true
-        }));
-
-        setitemquantity(prev => ({
-            ...prev,
-            [index]: 1
-        }));
-    }
 
 
     return (
         <>
             <Navbar quantity={cartquantity}></Navbar>
             <Carousel></Carousel>
-            <Products AddtoCart={AddtoCart} inCart={inCart} Additem={Additem} Substractitem={Substractitem} itemquantity={itemquantity} ></Products>
+            <Products AddtoCart={AddtoCart} Additem={Additem} Substractitem={Substractitem} itemquantity={itemquantity}  ></Products>
             <Footer></Footer>
         </>
     )
