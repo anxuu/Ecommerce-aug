@@ -2,7 +2,7 @@ import Footer from '../Components/Footer/Footer'
 import Navbar from '../Components/Navbar/Navbar'
 import Products from '../Components/Product/Product'
 import Carousel from '../Components/Carousel/Carousel'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 
 function Homepage() {
@@ -10,18 +10,22 @@ function Homepage() {
     const [cartquantity, setcartquantity] = useState(0);
     const [itemquantity, setitemquantity] = useState({});
 
+    useEffect(() => {
+        let totalitems = Object.values(itemquantity).filter(value => value > 0).length;
+        setcartquantity(totalitems);
+    }, [itemquantity]);
+
+
 
     function AddtoCart(e) {
 
         const itemid = e.target.value;
 
-        setcartquantity(prev => prev + 1);
-
-
         setitemquantity(prev => ({
             ...prev,
             [itemid]: (prev[itemid] || 0) + 1
         }));
+
     }
 
     function Additem(e) {
@@ -39,6 +43,7 @@ function Homepage() {
             ...prev,
             [itemid]: prev[itemid] > 1 ? (prev[itemid] - 1) : 0
         }));
+
     }
 
 
