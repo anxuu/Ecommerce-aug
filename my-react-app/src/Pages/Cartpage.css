@@ -1,0 +1,67 @@
+.Cartgrid {
+    display: grid;
+    grid-template-columns: 9fr 3fr;
+}
+
+.Carttable {
+    text-align: center;
+
+    border-collapse: collapse;
+
+}
+
+
+
+.OrderTotalbtn {
+
+    padding-left: 10%;
+    padding-top: 10%;
+
+}
+
+.OrderTotal {
+
+
+
+
+    font-size: 1.2rem;
+    background-color: #212529;
+    color: white;
+    margin-bottom: 20px;
+
+    padding: 5%;
+
+}
+
+.OrderTotal td {
+    padding: 2%;
+}
+
+.proceed-btn {
+
+    cursor: pointer;
+    text-decoration: none;
+    margin-top: 10px;
+    font-size: 1em;
+    background-color: #FF4500;
+    color: rgb(6, 34, 58);
+    border: none;
+    border-radius: 10px;
+    padding: 2%;
+}
+
+@media screen and (max-width:768px) {
+    .Cartgrid {
+        grid-template-columns: 12fr;
+        gap: 1rem;
+    }
+
+    .Carttable {
+        grid-row: 1;
+    }
+
+    .OrderTotalbtn {
+        grid-row: 2;
+    }
+
+}
