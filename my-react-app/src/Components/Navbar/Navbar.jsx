@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import './Navbar.css';
 
+import { Link } from "react-router-dom";
+
 
 function Navbar(props) {
 
@@ -11,15 +13,16 @@ function Navbar(props) {
 
                 <div className='flex navleft'>
 
-                    <img src="/logo-ecommerce.png" alt="logo" />
+
+                    <Link to="/Homepage">  <img src="/logo-ecommerce.png" alt="logo" /> </Link>
 
 
-                    <a href="/home">home</a>
 
 
 
                     <div className='flex cart'>
-                        <a style={{ textDecoration: 'none', color: 'white' }} href="">Cart</a>
+                        <Link style={{ textDecoration: 'none', color: 'white' }} to="/Cartpage">Cart</Link>
+
 
                         <span className="cart-icon bi bi-cart4">
                             <span className="cart-count">{props.quantity}</span>
