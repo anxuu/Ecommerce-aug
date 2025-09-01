@@ -9,11 +9,11 @@ function Footer() {
                 <div className="column1">
                     <ul>
                         <h2>Categories</h2>
-                        <li><a href="">Watches</a></li>
-                        <li><a href="#article">Mobiles</a></li>
-                        <li><a href="#article">Tablets</a></li>
-                        <li><a href="#article">Audio</a></li>
-                        <li><a href="#article">Drone</a></li>
+                        <li><a href="">Men's Clothing</a></li>
+                        <li><a href="#article">Women's Clothing</a></li>
+                        <li><a href="#article">Jewellery</a></li>
+                        <li><a href="#article">Electronics</a></li>
+                        <li><a href="#article">Nothing</a></li>
                     </ul>
 
                 </div>

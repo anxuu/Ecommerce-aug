@@ -4,24 +4,22 @@ import Products from '../Components/Product/Product'
 import Carousel from '../Components/Carousel/Carousel'
 import { useState, useEffect } from 'react'
 
+import { useAtom } from 'jotai'
+import { itemQuantityAtom, cartQuantityAtom } from '../atoms/cartAtom'
+
 
 function Homepage() {
 
-    const [cartquantity, setcartquantity] = useState(0);
-    const [itemquantity, setitemquantity] = useState({});
+    const [cartQuantity, setcartQuantity] = useAtom(cartQuantityAtom);
 
-    useEffect(() => {
-        let totalitems = Object.values(itemquantity).filter(value => value > 0).length;
-        setcartquantity(totalitems);
-    }, [itemquantity]);
-
+    const [itemQuantity, setitemQuantity] = useAtom(itemQuantityAtom);
 
 
     function AddtoCart(e) {
 
         const itemid = e.target.value;
 
-        setitemquantity(prev => ({
+        setitemQuantity(prev => ({
             ...prev,
             [itemid]: (prev[itemid] || 0) + 1
         }));
@@ -30,7 +28,7 @@ function Homepage() {
 
     function Additem(e) {
         let itemid = e.target.value;
-        setitemquantity(prev => ({
+        setitemQuantity(prev => ({
             ...prev,
             [itemid]: (prev[itemid] || 0) + 1
         }));
@@ -39,7 +37,7 @@ function Homepage() {
     function Substractitem(e) {
         let itemid = e.target.value;
 
-        setitemquantity(prev => ({
+        setitemQuantity(prev => ({
             ...prev,
             [itemid]: prev[itemid] > 1 ? (prev[itemid] - 1) : 0
         }));
@@ -51,9 +49,9 @@ function Homepage() {
 
     return (
         <>
-            <Navbar quantity={cartquantity}></Navbar>
+            <Navbar quantity={cartQuantity}></Navbar>
             <Carousel></Carousel>
-            <Products AddtoCart={AddtoCart} Additem={Additem} Substractitem={Substractitem} itemquantity={itemquantity}  ></Products>
+            <Products AddtoCart={AddtoCart} Additem={Additem} Substractitem={Substractitem} itemquantity={itemQuantity}  ></Products>
             <Footer></Footer>
         </>
     )

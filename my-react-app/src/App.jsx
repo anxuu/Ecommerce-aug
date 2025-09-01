@@ -3,7 +3,6 @@ import './App.css'
 import Homepage from './Pages/Homepage'
 import Cartpage from './Pages/Cartpage'
 
-import Navbar from './Components/Navbar/Navbar'
 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -17,7 +16,7 @@ function App() {
 
           <Route path="/" element={<div> <Homepage></Homepage></div>} />
           <Route path="/Homepage" element={<div> <Homepage></Homepage></div>} />
-          <Route path="/Cartpage" element={<div> <Cartpage></Cartpage></div>} />
+          <Route path="/Cartpage" element={<Cartpage></Cartpage>} />
 
         </Routes>
       </BrowserRouter>
@@ -26,4 +25,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
