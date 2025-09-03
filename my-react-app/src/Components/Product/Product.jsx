@@ -48,6 +48,7 @@ function Products({ AddtoCart, inCart, Additem, Substractitem, itemquantity }) {
 
     }
 
+
     return (
         <>
 
@@ -86,40 +87,46 @@ function Products({ AddtoCart, inCart, Additem, Substractitem, itemquantity }) {
 
             <div className="product-grid">
                 {
+
                     displaydata.length > 0 ? (
-                        displaydata.map((item) => (
-                            <div className="cart" key={item.id}>
-                                <div className="imgdiv">
-                                    <img src={item.image} alt={item.title} />
-                                </div>
-                                <div className="product-details">
-                                    <p className="category">{item.category}</p>
-                                    <h3 className="product-name" title={item.title}>
-                                        {item.title.slice(0, 26)}{item.title.length > 24 ? '...' : ''}
-                                    </h3>
-                                    <div className="price-rating">
-                                        <p className="price">₹{item.price}</p>
-                                        <p className="rating">⭐ {item.rating.rate}</p>
+                        displaydata.map((item) => {
+
+                            const existingitem = itemquantity.find(i => i.id === item.id);
+
+                            return (
+                                <div className="cart" key={item.id}>
+                                    <div className="imgdiv">
+                                        <img src={item.image} alt={item.title} />
                                     </div>
-                                    {
-                                        itemquantity[item.id] > 0 ? (
-                                            <div className="btn-parent">
-                                                <button value={item.id} onClick={Substractitem}>-</button>
-                                                <span>{itemquantity[item.id]}</span>
-                                                <button value={item.id} onClick={Additem}>+</button>
+                                    <div className="product-details">
+                                        <p className="category">{item.category}</p>
+                                        <h3 className="product-name" title={item.title}>
+                                            {item.title.slice(0, 26)}{item.title.length > 24 ? '...' : ''}
+                                        </h3>
+                                        <div className="price-rating">
+                                            <p className="price">₹{item.price}</p>
+                                            <p className="rating">⭐ {item.rating.rate}</p>
+                                        </div>
 
-                                            </div>
-                                        ) : (
-                                            <div className="btn-parent">
-                                                <button onClick={AddtoCart} value={item.id} className="add-to-cart">Add To Cart</button>
-                                            </div>
-                                        )
-                                    }
+                                        {
+                                            existingitem ? (
+                                                <div className="btn-parent">
+                                                    <button value={item.id} onClick={Substractitem}>-</button>
+                                                    <span>{existingitem.quantity}</span>
+                                                    <button value={item.id} onClick={Additem}>+</button>
+
+                                                </div>
+                                            ) : (
+                                                <div className="btn-parent">
+                                                    <button onClick={() => AddtoCart(item)} className="add-to-cart" >Add To Cart</button>
+                                                </div>
+                                            )
+                                        }
 
 
-                                </div>
-                            </div>
-                        ))
+                                    </div>
+                                </div>)
+                        })
                     ) : (
                         <p>Items not Found</p>
                     )

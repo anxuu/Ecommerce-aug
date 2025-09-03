@@ -1,7 +1,11 @@
 import './Cart.css';
 
+import { atom, useAtom } from "jotai";
+import { itemQuantityAtom } from '../../atoms/cartAtom';
+
 
 function Cart() {
+    const [items, setitems] = useAtom(itemQuantityAtom);
     return (
         <div className="Cartgrid">
 
@@ -15,47 +19,31 @@ function Cart() {
                 </thead>
 
                 <tbody>
-                    <tr>
-                        <td style={{ display: 'flex', gap: '3%' }}>
-                            <div>
-                                <img src="/product1.jpg" alt="Product 1" style={{ height: '100px' }} />
-                            </div>
-                            <div>
-                                <p className="category">Headphone</p>
-                                <h3 className="product-name">Sony WX-50</h3>
-                            </div>
-                        </td>
-                        <td>1</td>
-                        <td>399</td>
-                    </tr>
+                    {
+                        items.length > 0 ? (
+                            items.map((item) => {
+                                return (<tr key={item.id}>
+                                    <td style={{ display: 'flex', gap: '3%' }}>
+                                        <div>
+                                            <img src={item.image} alt="Product 1" style={{ height: '100px' }} />
+                                        </div>
+                                        <div>
+                                            <p className="category">{item.title}</p>
+                                            <h3 className="product-name">{item.category}</h3>
+                                        </div>
+                                    </td>
 
-                    <tr>
-                        <td style={{ display: 'flex', gap: '3%' }}>
-                            <div>
-                                <img src="/product-2-watch.jpg" alt="Product 2" style={{ height: '100px' }} />
-                            </div>
-                            <div>
-                                <p className="category">Watch</p>
-                                <h3 className="product-name">Fastrack Pro</h3>
-                            </div>
-                        </td>
-                        <td>1</td>
-                        <td>589</td>
-                    </tr>
 
-                    <tr>
-                        <td style={{ display: 'flex', gap: '3%' }}>
-                            <div>
-                                <img src="/product-3-iphone.jpg" alt="Product 3" style={{ height: '100px' }} />
-                            </div>
-                            <div>
-                                <p className="category">Phone</p>
-                                <h3 className="product-name">iPhone 14</h3>
-                            </div>
-                        </td>
-                        <td>3</td>
-                        <td>1000</td>
-                    </tr>
+                                    <td>  <button>-</button> {item.quantity}  <button>+</button></td>
+
+
+                                    <td>{item.price}</td>
+                                </tr>)
+                            })) : (
+                            <h1>Nothing is in cart</h1>
+                        )
+                    }
+
                 </tbody>
             </table>
 

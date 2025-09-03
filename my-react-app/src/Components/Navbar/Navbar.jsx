@@ -3,11 +3,14 @@ import './Navbar.css';
 
 import { Link } from "react-router-dom";
 
+import { atom, useAtom } from 'jotai';
 
+import { cartQuantityAtom } from '../../atoms/cartAtom';
 
 
 function Navbar(props) {
 
+    const [cartquantity, setcartquantity] = useAtom(cartQuantityAtom);
     return (
 
         <>
@@ -27,7 +30,7 @@ function Navbar(props) {
 
 
                         <span className="cart-icon bi bi-cart4">
-                            <span className="cart-count">{props.quantity}</span>
+                            <span className="cart-count">{cartquantity > 0 ? cartquantity : ''}</span>
                         </span>
                     </div>
 

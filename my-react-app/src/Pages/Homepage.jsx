@@ -2,7 +2,6 @@ import Footer from '../Components/Footer/Footer'
 import Navbar from '../Components/Navbar/Navbar'
 import Products from '../Components/Product/Product'
 import Carousel from '../Components/Carousel/Carousel'
-import { useState, useEffect } from 'react'
 
 import { useAtom } from 'jotai'
 import { itemQuantityAtom, cartQuantityAtom } from '../atoms/cartAtom'
@@ -10,39 +9,51 @@ import { itemQuantityAtom, cartQuantityAtom } from '../atoms/cartAtom'
 
 function Homepage() {
 
+
     const [cartQuantity, setcartQuantity] = useAtom(cartQuantityAtom);
 
     const [itemQuantity, setitemQuantity] = useAtom(itemQuantityAtom);
 
+    // import { useState } from "react";
 
-    function AddtoCart(e) {
 
-        const itemid = e.target.value;
 
-        setitemQuantity(prev => ({
+    // Add item to cart (first time)
+    function AddtoCart(item) {
+        // const itemid = item.id;
+        setitemQuantity(prev => [
             ...prev,
-            [itemid]: (prev[itemid] || 0) + 1
-        }));
+            { ...item, quantity: 1 }
+        ])
+    };
 
-    }
 
+
+    // Increment quantity
     function Additem(e) {
-        let itemid = e.target.value;
-        setitemQuantity(prev => ({
-            ...prev,
-            [itemid]: (prev[itemid] || 0) + 1
-        }));
+        const itemid = Number(e.target.value);
+        setitemQuantity(prev =>
+            prev.map(i =>
+                i.id === itemid ? { ...i, quantity: i.quantity + 1 } : i
+            )
+        )
     }
 
+    // Decrement quantity
     function Substractitem(e) {
-        let itemid = e.target.value;
+        const itemid = Number(e.target.value);
 
-        setitemQuantity(prev => ({
-            ...prev,
-            [itemid]: prev[itemid] > 1 ? (prev[itemid] - 1) : 0
-        }));
-
+        setitemQuantity(prev =>
+            prev
+                .map(i =>
+                    i.id === itemid ? { ...i, quantity: i.quantity - 1 } : i
+                )
+                .filter(i => i.quantity > 0) // remove items with quantity 0
+        );
     }
+
+
+
 
 
 
@@ -56,4 +67,5 @@ function Homepage() {
         </>
     )
 }
+
 export default Homepage;
